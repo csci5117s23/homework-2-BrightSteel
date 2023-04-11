@@ -32,9 +32,9 @@
     padding-top: 0.5em;
 }
 
-/* .additem:hover {
+.additem:hover {
     color: red;
-} */
+}
 
 .addbutton {
     border: transparent;
@@ -44,8 +44,8 @@
     display: inline-block;
 }
 
-/* .addbutton:hover {
+.addbutton:hover {
     color: red;
-} */
+}
 
 

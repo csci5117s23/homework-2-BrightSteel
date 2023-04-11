@@ -4,12 +4,11 @@ import styles from '../styles/todos.module.css'
 import NavBar from "@/components/navbar"
 import Head from "next/head"
 import Modal from "@/components/add_task_modal"
+import AddItemBox from "@/components/AddItemBox"
 
 const Todo = () => {
     const [todos, setTodos] = useState([])
-    const [addItemHover, setAddItemHover] = useState(false)
-    const [showModal, setShowModal] = useState(false);
-
+    const [showItemBox, setShowItemBox] = useState(false)
   
 
     useEffect(() => {
@@ -21,28 +20,8 @@ const Todo = () => {
         )
     }, [])
 
-    function handleAddHover() {
-        setAddItemHover(true)
-    }
-
-    function handleAddUnhover() {
-        setAddItemHover(false)
-    }
-
-    function getColor(o) {
-        if (addItemHover) {
-            return "red";
-        }
-        return "black";
-    }
-
-    const handleOpenModal = () => {
-        setShowModal(true);
-        console.log(showModal);
-      };
-    
-      const handleCloseModal = () => {
-        setShowModal(false);
+    const handleShowBox = () => {
+        setShowItemBox(!showItemBox);
       };
 
     return (
@@ -62,18 +41,11 @@ const Todo = () => {
             </div>
             )     
         })}
-        <div onClick={handleOpenModal} style={{color: getColor(this)}} onMouseEnter={handleAddHover} onMouseLeave={handleAddUnhover} class={styles.additem}>
-                <button onClick={handleOpenModal} style={{color: getColor(this)}} onMouseEnter={handleAddHover} onMouseLeave={handleAddUnhover} id="addbutton" class={styles.addbutton}><i class="fa-solid fa-plus"></i></button>
-                Add task
-                
-        </div>
-        <Modal
-            title="My Modal"
-            content={<p>This is contents</p>}
-            isActive={showModal}
-            onClose={handleCloseModal}
+    
+        <AddItemBox
+            show={showItemBox}
+            handleShowBox={handleShowBox}
         />
-
         </div>
         </>
     )
