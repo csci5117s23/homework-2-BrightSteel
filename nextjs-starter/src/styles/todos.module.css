@@ -1,5 +1,5 @@
 .simple {
-    border: 1px solid black;
+    border: 1px solid gray;
     background-color: white;
     aspect-ratio: 1;
     margin-right: 0.5em;
@@ -8,11 +8,44 @@
 }
 
 .simple:hover {
-    border: 1px solid black;
-    background-color: black;
+    border: 1px solid gray;
+    background-color: gray;
     aspect-ratio: 1;
     margin-right: 0.5em;
     border-radius: 50%;
     display: inline-block;
 }
+
+.body {
+    padding-left: 1em;
+    padding-top: 0.5em;
+}
+
+.todoitem {
+    border-bottom: 0.5px solid gray;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
+
+.additem {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
+
+/* .additem:hover {
+    color: red;
+} */
+
+.addbutton {
+    border: transparent;
+    background-color: white;
+    margin-left: -0.3em;
+    margin-right: 0.1em;
+    display: inline-block;
+}
+
+/* .addbutton:hover {
+    color: red;
+} */
+
 
