@@ -66,7 +66,7 @@ const Todo = () => {
         //     {id: 2, description: "The second todo task is going to be super long i wonder what will happen i really am not super sure but i want to find out", category: null, done: 0},
         //     ]
         // )
-    }, [])
+    }, [userId])
 
     const handleShowBox = () => {
         setShowItemBox(!showItemBox);
