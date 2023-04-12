@@ -1,23 +1,56 @@
 import 'bulma/css/bulma.min.css';
 import styles from '../styles/todos.module.css'
+import { useState } from 'react';
+
 
 function AddItemBox({show, handleShowBox}) {
+
+    // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
+    const [formState, setFormState] = useState({
+        name: "",
+        category: "",
+        description: ""
+    })
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(formState)
+    }
+    const handleInputChange = (event) => {
+        const {name, value} = event.target;
+        setFormState((prevProps) => ({
+            ...prevProps,
+            [name]: value
+        }))
+    }
 
     if (show) {
         return (
             <div style={{paddingTop: "1em"}}>
-            <form id="usrform">
+            <form id="usrform" onSubmit={handleSubmit}>
             <div className="field">
                 <label className="label">Task Name</label>
                 <div className="control">
-                    <input className="input" type="text" placeholder="Text input" required></input>
+                    <input 
+                        className="input" 
+                        type="text" 
+                        placeholder="Text input"
+                        defaultValue={formState.name} 
+                        onChange={handleInputChange}
+                        required
+                    />
                 </div>
             </div>
             <div className="field">
             <label className="label">Category</label>
             <div className="control">
                 <div className="select is-info">
-                <select  name="category" id="category" required>
+                <select 
+                    name="category" 
+                    id="category" 
+                    defaultValue={formState.category}
+                    onChange={handleInputChange}
+                    required
+                    >
                     <option value="">Select Category</option>
                     <option value="1">Option1</option>
                 </select>
@@ -27,7 +60,13 @@ function AddItemBox({show, handleShowBox}) {
             <div className="field">
             <label className="label">Description</label>
             <div className="control">
-                <textarea className="textarea" placeholder="Textarea" required></textarea>
+                <textarea 
+                    className="textarea" 
+                    placeholder="Textarea" 
+                    defaultValue={formState.description}
+                    onChange={handleInputChange}
+                    required
+                />
             </div>
             </div>
             <div className="field is-grouped">
