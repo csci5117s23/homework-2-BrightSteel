@@ -12,9 +12,8 @@ app.get('/', (req, res) => {
 })
 
 const todos = object({
-  name: string().required(),
-  category: string(),
-  description: string().required()
+  description: string().required(),
+  category: string()
 })
 
 async function clear(req, res) {

@@ -7,9 +7,8 @@ function AddItemBox({setShow, show, handleShowBox, postTodoEntry}) {
 
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
     const [formState, setFormState] = useState({
-        name: "",
-        category: "",
-        description: ""
+        description: "",
+        category: ""
     })
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,14 +29,14 @@ function AddItemBox({setShow, show, handleShowBox, postTodoEntry}) {
             <div style={{paddingTop: "1em"}}>
             <form id="usrform" onSubmit={handleSubmit}>
             <div className="field">
-                <label className="label">Task Name</label>
+                <label className="label">Task Description</label>
                 <div className="control">
                     <input 
                         className="input" 
                         type="text" 
-                        name="name"
+                        name="description"
                         placeholder="Text input"
-                        defaultValue={formState.name} 
+                        defaultValue={formState.description} 
                         onChange={handleInputChange}
                         required
                     />
@@ -57,19 +56,6 @@ function AddItemBox({setShow, show, handleShowBox, postTodoEntry}) {
                     <option value="1">Option1</option>
                 </select>
                 </div>
-            </div>
-            </div>
-            <div className="field">
-            <label className="label">Description</label>
-            <div className="control">
-                <textarea 
-                    name="description"
-                    className="textarea" 
-                    placeholder="Textarea" 
-                    defaultValue={formState.description}
-                    onChange={handleInputChange}
-                    required
-                />
             </div>
             </div>
             <div className="field is-grouped">
