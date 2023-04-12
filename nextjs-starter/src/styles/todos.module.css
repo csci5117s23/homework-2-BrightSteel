@@ -42,10 +42,6 @@
     padding-top: 0.5em;
 }
 
-.additem:hover {
-    color: red;
-}
-
 .addbutton {
     border: transparent;
     background-color: white;
@@ -56,7 +52,7 @@
 }
 
 .addbutton:hover {
-    color: red;
+    color: #209cee;
 }
 
 

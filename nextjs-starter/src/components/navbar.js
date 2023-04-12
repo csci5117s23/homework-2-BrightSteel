@@ -1,20 +1,21 @@
 import 'bulma/css/bulma.min.css';
+import styles from '../styles/navbar.module.css'
 
 function NavBar() {
     return (
         <>
-        <nav style={{backgroundColor: "red"}} className="navbar" role="navigation" aria-label="main navigation">
+        <nav className={styles.navbar + " navbar"} role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
             </div>
             <div className="navbar-menu">
                 <div className="navbar-start">
-                    <a style={{color: "white"}} href="/todos" className="navbar-item" onMouseEnter={(object) => object.target.style.color = 'black'} onMouseLeave={(object) => object.target.style.color = 'white'}>
+                    <a href="/todos" className={"navbar-item " + styles.navitem}>
                         Home
                     </a>
-                    <a style={{color: "white"}} className="navbar-item" onMouseEnter={(object) => object.target.style.color = 'black'} onMouseLeave={(object) => object.target.style.color = 'white'}>
+                    <a href="/todos" className={"navbar-item " + styles.navitem}>                       
                         Categories
                     </a>
-                    <a style={{color: "white"}} className="navbar-item" onMouseEnter={(object) => object.target.style.color = 'black'} onMouseLeave={(object) => object.target.style.color = 'white'}>
+                    <a href="/todos" className={"navbar-item " + styles.navitem}>                        
                         Done
                     </a>
                 </div>
