@@ -18,8 +18,14 @@
 
 .body {
     padding-left: 1em;
-    padding-top: 0.5em;
+    padding-top: 2.5em;
 }
+
+.body h1 {
+    font-size: x-large;
+    padding-bottom: 0.3em;
+}
+
 
 .todoitem {
     border-bottom: 0.5px solid gray;
@@ -42,6 +48,7 @@
     margin-left: -0.3em;
     margin-right: 0.1em;
     display: inline-block;
+    font-size: medium;
 }
 
 .addbutton:hover {
