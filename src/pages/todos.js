@@ -14,11 +14,7 @@ const Todo = () => {
 
     async function postTodoEntry(data) {
         if (userId) { // logged in user
-            // const test = JSON.stringify({
-            //     name: "Somename",
-            //     category: "Somecategory",
-            //     description: "test"
-            // });
+            
             console.log(data)
             const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
             const token = await getToken({template: "codehooks"});
@@ -34,39 +30,36 @@ const Todo = () => {
             })
             const results = await promise;
             console.log(results)
+
+            setReloadTodos(!reloadTodos)
+        }
+    }
+
+    async function getTodos() {
+        if (userId) { // logged in user
+            const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
+            const token = await getToken({template: "codehooks"});
+            const promise = await fetch(backend_base + "/todos",
+            {
+                'method': 'GET',
+                'headers': {
+                    'x-api-key': 'a0ad972b-1710-4187-ac7f-bdd030d9d462',
+                    'Authorization': 'Bearer' + token
+                }
+            })
+            const results = await promise.json()
+            // use result
+            console.log("grabbed: " + results);
+            setTodos(results);
         }
     }
   
     useEffect(() => {
-        async function getTodos() {
-            if (userId) { // logged in user
-                const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
-                const token = await getToken({template: "codehooks"});
-                const promise = await fetch(backend_base + "/todos",
-                {
-                    'method': 'GET',
-                    'headers': {
-                        'x-api-key': 'a0ad972b-1710-4187-ac7f-bdd030d9d462',
-                        'Authorization': 'Bearer' + token
-                    }
-                })
-                const results = await promise.json()
-                // use result
-                console.log("grabbed: " + results);
-                setTodos(results);
-            }
-        }
+    
         getTodos()
         console.log(todos)
-
-
-        // setTodos(
-        //     [
-        //     {id: 1, description: "The todo task", category: null, done: 0},
-        //     {id: 2, description: "The second todo task is going to be super long i wonder what will happen i really am not super sure but i want to find out", category: null, done: 0},
-        //     ]
-        // )
-    }, [userId])
+        
+    }, [userId, reloadTodos])
 
     const handleShowBox = () => {
         setShowItemBox(!showItemBox);
@@ -93,9 +86,9 @@ const Todo = () => {
 
                     <AddItemBox
                         show={showItemBox}
+                        setShow={setShowItemBox}
                         handleShowBox={handleShowBox}
                         postTodoEntry={postTodoEntry}
-                        setReloadTodos={setReloadTodos}
                     />
                 </div>
             </div>

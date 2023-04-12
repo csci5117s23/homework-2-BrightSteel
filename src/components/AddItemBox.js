@@ -3,7 +3,7 @@ import styles from '../styles/todos.module.css'
 import { useState } from 'react';
 
 
-function AddItemBox({show, handleShowBox, postTodoEntry, setReloadTodos}) {
+function AddItemBox({setShow, show, handleShowBox, postTodoEntry}) {
 
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
     const [formState, setFormState] = useState({
@@ -14,7 +14,7 @@ function AddItemBox({show, handleShowBox, postTodoEntry, setReloadTodos}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         postTodoEntry(formState)
-        setReloadTodos(true)
+        setShow(false)
     }
     const handleInputChange = (event) => {
 
@@ -52,7 +52,6 @@ function AddItemBox({show, handleShowBox, postTodoEntry, setReloadTodos}) {
                     id="category" 
                     defaultValue={formState.category}
                     onChange={handleInputChange}
-                    required
                     >
                     <option value="">Select Category</option>
                     <option value="1">Option1</option>
