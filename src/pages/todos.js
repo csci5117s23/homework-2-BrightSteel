@@ -1,8 +1,8 @@
 import Script from "next/script"
 import React, { useEffect, useState } from "react"
 import styles from '../styles/todos.module.css'
-import NavBar from "@/components/navbar"
-import AddItemBox from "@/components/AddItemBox"
+import NavBar from "../components/navbar"
+import AddItemBox from "../components/AddItemBox"
 import 'bulma/css/bulma.min.css';
 
 const Todo = () => {
