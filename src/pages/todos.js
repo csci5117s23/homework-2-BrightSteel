@@ -10,6 +10,32 @@ const Todo = () => {
     const [todos, setTodos] = useState([])
     const [showItemBox, setShowItemBox] = useState(false)
     const {isLoaded, userId, sessionId, getToken} = useAuth();
+    const [reloadTodos, setReloadTodos] = useState(false)
+
+    async function postTodoEntry(data) {
+        if (userId) { // logged in user
+            // const test = JSON.stringify({
+            //     name: "Somename",
+            //     category: "Somecategory",
+            //     description: "test"
+            // });
+            console.log(data)
+            const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
+            const token = await getToken({template: "codehooks"});
+            const promise = await fetch(backend_base + "/todos",
+            {
+                'method': 'POST',
+                'headers': {
+                    'x-api-key': 'a0ad972b-1710-4187-ac7f-bdd030d9d462',
+                    'Authorization': 'Bearer' + token,
+                    'Content-Type': 'application/json'
+                },
+                'body': JSON.stringify(data)
+            })
+            const results = await promise;
+            console.log(results)
+        }
+    }
   
     useEffect(() => {
         async function getTodos() {
@@ -26,11 +52,12 @@ const Todo = () => {
                 })
                 const results = await promise.json()
                 // use result
-                console.log(results);
+                console.log("grabbed: " + results);
                 setTodos(results);
             }
         }
         getTodos()
+        console.log(todos)
 
 
         // setTodos(
@@ -67,6 +94,8 @@ const Todo = () => {
                     <AddItemBox
                         show={showItemBox}
                         handleShowBox={handleShowBox}
+                        postTodoEntry={postTodoEntry}
+                        setReloadTodos={setReloadTodos}
                     />
                 </div>
             </div>

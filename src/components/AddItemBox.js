@@ -3,7 +3,7 @@ import styles from '../styles/todos.module.css'
 import { useState } from 'react';
 
 
-function AddItemBox({show, handleShowBox}) {
+function AddItemBox({show, handleShowBox, postTodoEntry, setReloadTodos}) {
 
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
     const [formState, setFormState] = useState({
@@ -13,9 +13,11 @@ function AddItemBox({show, handleShowBox}) {
     })
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formState)
+        postTodoEntry(formState)
+        setReloadTodos(true)
     }
     const handleInputChange = (event) => {
+
         const {name, value} = event.target;
         setFormState((prevProps) => ({
             ...prevProps,
@@ -33,6 +35,7 @@ function AddItemBox({show, handleShowBox}) {
                     <input 
                         className="input" 
                         type="text" 
+                        name="name"
                         placeholder="Text input"
                         defaultValue={formState.name} 
                         onChange={handleInputChange}
@@ -61,6 +64,7 @@ function AddItemBox({show, handleShowBox}) {
             <label className="label">Description</label>
             <div className="control">
                 <textarea 
+                    name="description"
                     className="textarea" 
                     placeholder="Textarea" 
                     defaultValue={formState.description}

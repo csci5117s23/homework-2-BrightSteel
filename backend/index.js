@@ -1,4 +1,4 @@
-
+import {date, object, string} from 'yup';
 /*
 * Auto generated Codehooks (c) example
 * Install: npm i codehooks-js codehooks-crudlify
@@ -11,8 +11,14 @@ app.get('/', (req, res) => {
   res.send('CRUD server ready')
 })
 
+const todos = object({
+  name: string().required(),
+  category: string(),
+  description: string().required()
+})
+
 // Use Crudlify to create a REST API for any collection
-crudlify(app)
+crudlify(app, {todos: todos})
 
 // bind to serverless runtime
 export default app.init();
