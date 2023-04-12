@@ -13,7 +13,8 @@ app.get('/', (req, res) => {
 
 const todos = object({
   description: string().required(),
-  category: string()
+  category: string(),
+  done: string()
 })
 
 async function clear(req, res) {
@@ -23,6 +24,14 @@ async function clear(req, res) {
 }
 
 app.post('/clear', clear);
+
+async function markDone(req, res) {
+  const conn = await Datastore.open();
+  const data = await conn.updateOne('todos', req.params.id, req.body);
+  res.json(data);
+}
+
+app.post('/done/:id', markDone);
 
 // Use Crudlify to create a REST API for any collection
 crudlify(app, {todos: todos})
