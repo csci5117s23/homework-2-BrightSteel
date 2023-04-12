@@ -13,7 +13,7 @@ const Todo = () => {
         setTodos(
             [
             {id: 1, description: "The todo task", category: null, done: 0},
-            {id: 2, description: "The second todo task", category: null, done: 0},
+            {id: 2, description: "The second todo task is going to be super long i wonder what will happen i really am not super sure but i want to find out", category: null, done: 0},
             ]
         )
     }, [])
@@ -34,7 +34,7 @@ const Todo = () => {
                         </div>
                         {todos.map(function(object, i){
                             return (
-                            <div style={{fontSize: "large"}} key={i} className={styles.todoitem}>
+                            <div key={i} className={styles.todoitem}>
                                 <button className={styles.simple}></button>
                                 {object.description}
                             </div>

@@ -8,8 +8,8 @@
 }
 
 .simple:hover {
-    border: 1px solid gray;
-    background-color: gray;
+    border: 1px solid #209cee;
+    background-color: #209cee;
     aspect-ratio: 1;
     margin-right: 0.5em;
     border-radius: 50%;
@@ -31,6 +31,10 @@
     border-bottom: 0.5px solid gray;
     padding-bottom: 0.5em;
     padding-top: 0.5em;
+    max-lines: 1;
+    overflow: hidden;
+    font-size: medium;
+    max-height: 2.4em;
 }
 
 .additem {

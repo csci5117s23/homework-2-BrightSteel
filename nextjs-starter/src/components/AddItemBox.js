@@ -16,7 +16,7 @@ function AddItemBox({show, handleShowBox}) {
             <div className="field">
             <label className="label">Category</label>
             <div className="control">
-                <div className="select">
+                <div className="select is-info">
                 <select  name="category" id="category" required>
                     <option value="">Select Category</option>
                     <option value="1">Option1</option>
@@ -32,10 +32,10 @@ function AddItemBox({show, handleShowBox}) {
             </div>
             <div className="field is-grouped">
             <div className="control">
-                <button className="button is-link">Submit</button>
+                <button className="button is-info ">Submit</button>
             </div>
             <div className="control">
-                <button onClick={handleShowBox} className="button is-link is-light">Cancel</button>
+                <button onClick={handleShowBox} className="button is-info is-light">Cancel</button>
             </div>
             </div>
             </form>
