@@ -14,7 +14,6 @@ const Todo = () => {
 
     async function postTodoEntry(data) {
         if (userId) { // logged in user
-            
             console.log(data)
             const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
             const token = await getToken({template: "codehooks"});
@@ -50,8 +49,8 @@ const Todo = () => {
                 },
                 'body': JSON.stringify(object)
             })
-            await promise.json()
-            
+            const result = await promise.json()
+            console.log("DONE" + result)
             setReloadTodos(!reloadTodos)
         }
     }

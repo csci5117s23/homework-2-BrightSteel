@@ -8,7 +8,8 @@ function AddItemBox({setShow, show, handleShowBox, postTodoEntry}) {
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
     const [formState, setFormState] = useState({
         description: "",
-        category: ""
+        category: "",
+        user_id: ""
     })
     const handleSubmit = (event) => {
         event.preventDefault();
