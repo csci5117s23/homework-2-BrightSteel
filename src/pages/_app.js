@@ -13,11 +13,6 @@ export default function App({ Component, pageProps }) {
     <SignedOut>
         <RedirectToSignIn></RedirectToSignIn>
     </SignedOut>
-    <SignedIn>
-      <Redirect
-        url='/todos'
-      />
-    </SignedIn>
   </ClerkProvider>
   )
 }

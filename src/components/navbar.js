@@ -15,7 +15,7 @@ function NavBar() {
                     <a href="/todos" className={"navbar-item " + styles.navitem}>                       
                         Categories
                     </a>
-                    <a href="/todos" className={"navbar-item " + styles.navitem}>                        
+                    <a href="/done" className={"navbar-item " + styles.navitem}>                        
                         Done
                     </a>
                 </div>

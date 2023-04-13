@@ -1,4 +1,6 @@
+import { SignedIn } from '@clerk/clerk-react'
 import Head from 'next/head'
+import Redirect from './redirect'
 
 export default function Home() {
   return (
@@ -10,7 +12,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Ryan's Todo App</h1>
-      
+      <SignedIn>
+      <Redirect
+        url='/todos'
+      />
+      </SignedIn>
     </>
   )
 }

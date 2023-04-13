@@ -7,6 +7,11 @@
     display: inline-block;
 }
 
+.completed {
+    border: 1px solid #209cee;
+    background-color: #209cee;
+}
+
 .simple:hover {
     border: 1px solid #209cee;
     background-color: #209cee;
@@ -51,7 +56,7 @@
     font-size: medium;
 }
 
-.addbutton:hover {
+.completedbutton {
     color: #209cee;
 }
 
