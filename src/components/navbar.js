@@ -16,7 +16,7 @@ function NavBar() {
                         Categories
                     </a>
                     <a href="/done" className={"navbar-item " + styles.navitem}>                        
-                        Done
+                        Completed
                     </a>
                 </div>
             </div>

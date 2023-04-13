@@ -56,6 +56,10 @@
     font-size: medium;
 }
 
+.addbutton:hover {
+    color: #209cee;
+}
+
 .completedbutton {
     color: #209cee;
 }
