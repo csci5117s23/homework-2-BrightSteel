@@ -69,7 +69,7 @@ const Todo = () => {
             })
             const results = await promise.json()
             // use result
-            // results.map(v => console.log(v))
+            results.map(v => console.log(v))
             var notDone = results.filter(v => v.done !== "true")
             setTodos(notDone.reverse());
         }
@@ -105,7 +105,7 @@ const Todo = () => {
                             return (
                             <div key={i} className={styles.todoitem}>
                                 <button onClick={(event) => handleMarkDone(event, object)} className={styles.simple}></button>
-                                {object.description}
+                                <a href={"todo/" + object._id}>{object.description}</a>
                             </div>
                             )
                          

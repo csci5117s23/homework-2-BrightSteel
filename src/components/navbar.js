@@ -12,7 +12,7 @@ function NavBar() {
                     <a href="/todos" className={"navbar-item " + styles.navitem}>
                         Home
                     </a>
-                    <a href="/todos" className={"navbar-item " + styles.navitem}>                       
+                    <a href="/categories" className={"navbar-item " + styles.navitem}>                       
                         Categories
                     </a>
                     <a href="/done" className={"navbar-item " + styles.navitem}>                        

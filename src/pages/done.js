@@ -49,7 +49,7 @@ const Done = () => {
                             return (
                             <div key={i} className={styles.todoitem}>
                                 <button className={styles.simple + " " + styles.completed}></button>
-                                <span style={{textDecoration: "line-through"}}>{object.description}</span>
+                                <a href={"/todo/" + object._id} style={{textDecoration: "line-through"}}>{object.description}</a>
                             </div>
                             )
                          

@@ -7,6 +7,15 @@
     display: inline-block;
 }
 
+.simple2 {
+    border: 1px solid gray;
+    background-color: white;
+    aspect-ratio: 1;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    display: inline-block;
+}
+
 .completed {
     border: 1px solid #209cee;
     background-color: #209cee;
@@ -62,6 +71,16 @@
 
 .completedbutton {
     color: #209cee;
+}
+
+.editmarkdone {
+    margin-right: 0.9em;
+    block-size: 1.9em;
+}
+
+.editmarkdone:hover {
+    margin-right: 0.9em;
+    block-size: 1.9em;
 }
 
 

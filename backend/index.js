@@ -44,6 +44,12 @@ async function postTodo(req, res) {
 
 app.post('/todos', postTodo)
 
+async function getTodo(req, res) {
+  const conn = await Datastore.open();
+  const data = await conn.getOne('todos', req.params.id)
+  res.json(data)
+}
+
 async function getTodos(req, res) {
 
   let id = "none"
@@ -60,6 +66,7 @@ async function getTodos(req, res) {
 }
 
 app.get('/todos', getTodos)
+app.get('/todo/:id', getTodo)
 
 const todos = object({
   description: string().required(),
