@@ -112,7 +112,7 @@ const TodoPage = ({category}) => {
         // console.log(todos)
 
         
-    }, [userId, reloadTodos])
+    }, [userId, reloadTodos, router.query])
 
     const handleShowBox = () => {
         setShowItemBox(!showItemBox);

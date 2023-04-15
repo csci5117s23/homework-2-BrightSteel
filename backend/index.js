@@ -50,7 +50,7 @@ async function getCategories(req, res) {
     const options = {
         filter: {"user_id": req.user_token.sub}
     }
-    const data = conn.getMany('categories').json(res);
+    const data = conn.getMany('categories', options).json(res);
     // res.json(data)
   }
   else {

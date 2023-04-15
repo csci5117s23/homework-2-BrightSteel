@@ -4,8 +4,12 @@ import styles from '../styles/todos.module.css'
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import SideBar from "../components/SideBar";
+import { useRouter } from "next/router";
 
 const DonePage = ({category}) => {
+
+    const router = useRouter();
+
 
     const [todos, setTodos] = useState([])
     const {isLoaded, userId, sessionId, getToken} = useAuth();
@@ -59,7 +63,7 @@ const DonePage = ({category}) => {
     
         getTodos()
         
-    }, [userId, reloadTodos])
+    }, [userId, reloadTodos, router.query])
 
     return (
         <>
