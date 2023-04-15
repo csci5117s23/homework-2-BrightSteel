@@ -54,7 +54,7 @@ const AddItemBox = ({setShow, show, handleShowBox, postTodoEntry, category, cate
                     defaultValue={category}
                     onChange={handleInputChange}
                     >
-                        <option value="">Select Category</option>
+                        <option value="">None</option>
                         
                         {categories.map(function(object, i) {
                             return (

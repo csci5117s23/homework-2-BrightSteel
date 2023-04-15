@@ -1,7 +1,12 @@
 import 'bulma/css/bulma.min.css';
 import styles from '../styles/navbar.module.css'
+import Redirect from '../pages/redirect';
+import { useRouter } from 'next/router';
 
 function NavBar() {
+
+    const router = useRouter();
+
     return (
         <>
         <nav className={styles.navbar + " navbar"} role="navigation" aria-label="main navigation">
@@ -9,14 +14,14 @@ function NavBar() {
             </div>
             <div className="navbar-menu">
                 <div className="navbar-start">
-                    <a href="/todos" className={"navbar-item " + styles.navitem}>
+                    <a onClick={() => router.push('/todos')} className={"navbar-item " + styles.navitem}>
                         Home
                     </a>
-                    <a href="/categories" className={"navbar-item " + styles.navitem}>                       
-                        Categories
+                    <a href='https://magical-molly-92.accounts.dev/sign-in' className={"navbar-item " + styles.navitem}>                       
+                        Sign Out
                     </a>
-                    <a href="/done" className={"navbar-item " + styles.navitem}>                        
-                        Completed
+                    <a onClick={() => router.push('/done')} className={"navbar-item " + styles.navitem}>                        
+                        Done
                     </a>
                 </div>
             </div>

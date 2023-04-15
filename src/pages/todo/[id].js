@@ -9,6 +9,9 @@ const Todo = () => {
     const {isLoaded, userId, sessionId, getToken} = useAuth();
     const [todo, setTodo] = useState({})
     const [done, setDone] = useState()
+    const [category, setCategory] = useState()
+
+    const [categories, setCategories] = useState([])
 
     const router = useRouter();
     const {id} = router.query
@@ -19,8 +22,26 @@ const Todo = () => {
 
     }, [userId])
 
+    async function getCategories() {
+        if (userId) {
+            const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
+            const token = await getToken({template: "codehooks"});
+            const promise = await fetch(backend_base + "/categories",
+            {
+                'method': 'GET',
+                'headers': {
+                    'x-api-key': 'a0ad972b-1710-4187-ac7f-bdd030d9d462',
+                    'Authorization': 'Bearer' + token,
+                }
+            })
+            const results = await promise.json()
+            setCategories(results)
+        }
+    }
+
     async function editTodo() {
         todo.done = done;
+        todo.category = category
         if (userId) { // logged in user
             const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
             const token = await getToken({template: "codehooks"});
@@ -91,6 +112,7 @@ const Todo = () => {
             else {
                 setDone("false")
             }
+            getCategories()
         }
     }
 
@@ -118,6 +140,30 @@ const Todo = () => {
                         <div style={{display: "flex", alignItems: "center", paddingTop: "0.3em"}}> 
                         <DoneButton></DoneButton>
                         <TextBox></TextBox>
+                        </div>
+                        <div className="field">
+                        <label className="label">Category</label>
+                        <div className="control">
+                            <div className="select is-info">
+                            <select 
+                                name="category" 
+                                id="category" 
+                                defaultValue={todo.category}
+                                onChange={setCategory}
+                                >
+                                    <option value="">None</option>
+                                    
+                                    {categories.map(function(object, i) {
+                                        return (
+                                        <option key={i} value={object.category}>{object.category}</option>
+                                        )
+                                    })}
+                                
+                            </select>
+
+                            </div>
+                            </div>
+
                         </div>
                         <div style={{paddingTop: "2.3em"}} className="field is-grouped columns is-centered">
                             <div className="control">

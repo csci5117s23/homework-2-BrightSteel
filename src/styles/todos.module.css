@@ -10,13 +10,13 @@
 .editbutton {
     background-color: white;
     border-color: transparent;
-    /* color: white; */
+    color: gray;
 }
 
-/* .editbutton:hover {
-    border-color: transparent;
+.editbutton:hover {
+    /* border-color: transparent; */
     color: black;
-} */
+}
 
 .simple2 {
     border: 1px solid gray;

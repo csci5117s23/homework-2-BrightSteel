@@ -6,6 +6,7 @@ import AddItemBox from "../components/AddItemBox"
 import 'bulma/css/bulma.min.css';
 import { useAuth } from "@clerk/clerk-react"
 import AddCategoryBox from "./AddCategoryBox"
+import { useRouter } from "next/router"
 
 const TodoPage = ({category}) => {
     const [todos, setTodos] = useState([])
@@ -17,6 +18,8 @@ const TodoPage = ({category}) => {
     const [buttonStates, setButtonStates] = useState(
         [false, false]
     )
+
+    const router = useRouter();
 
     async function postTodoEntry(data) {
         if (userId) { // logged in user
@@ -89,9 +92,8 @@ const TodoPage = ({category}) => {
 
     async function createCategory(name) {
         if (userId && categories) {
-            if (categories[0] !== undefined && categories.some(i => i === name)) {
+            if (categories[0] !== undefined && categories.some(i => i.category === name)) {
                 // category already exists
-                console.log("alrdy exists")
             }
             else {
                 const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
@@ -130,8 +132,6 @@ const TodoPage = ({category}) => {
             })
             const results = await promise.json()
             setCategories(results)
-            console.log("CATEGORIES")
-            console.log(categories)
         }
     }
 
@@ -203,7 +203,7 @@ const TodoPage = ({category}) => {
 
     const EditButton = ({i}) => {
         if (buttonStates[i] === true) {
-            return <button id="editbutton" className={styles.editbutton}><i className="fa-regular fa-trash"></i></button>
+            return <button onClick={() => deleteCategory(categories[i]._id)} id="editbutton" className={styles.editbutton}><i className="fa-regular fa-trash"></i></button>
         }
         else {
             return <div></div>;
@@ -222,12 +222,13 @@ const TodoPage = ({category}) => {
                         Categories
                     </p>
                     <ul className="menu-list">
-                    <li><a href="/todos">All To-Dos</a></li>
+                    <li><a onClick={() => router.push('/todos')}>All To-Dos</a></li>
 
                         {categories.map(function(object,i ){
                             return (
-                                <li key={i} onClick={() => deleteCategory(categories[i]._id)} onMouseEnter={() => editHover(i)} onMouseLeave={() => editRemoveHover(i)} className="is-flex"><a href={"/todos/" + object.category}>{object.category}</a>
+                                <li key={i} onMouseEnter={() => editHover(i)} onMouseLeave={() => editRemoveHover(i)} className="is-flex"><a onClick={() => router.push('/todos/' + object.category)}>{object.category}</a>
                                 <EditButton
+                                    
                                     i={i}
                                 />
                                 </li>
@@ -249,7 +250,7 @@ const TodoPage = ({category}) => {
                             return (
                             <div key={i} className={styles.todoitem}>
                                 <button onClick={(event) => handleMarkDone(event, object)} className={styles.simple}></button>
-                                <a href={"todo/" + object._id}>{object.description}</a>
+                                <a onClick={() => router.push('todo/' + object._id)} >{object.description}</a>
                             </div>
                             )
                          

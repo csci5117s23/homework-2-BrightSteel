@@ -11,7 +11,7 @@ const Page = () => {
                 <h1 style={{fontSize: "x-large", fontWeight: "bold"}}>The page you're looking for can't be found</h1>
             </div>
             <div className="columns is-centered" style={{paddingTop: "0.5em"}}>
-                    <a href="/todos">Back to home</a>
+                    <a onClick={() => router.push('/todos')}>Back to home</a>
                 </div>
             </div>
         </div>
