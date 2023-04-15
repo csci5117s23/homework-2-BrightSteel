@@ -3,7 +3,7 @@ import styles from '../styles/todos.module.css'
 import { useState } from 'react';
 
 
-function AddItemBox({setShow, show, handleShowBox, postTodoEntry, category}) {
+const AddItemBox = ({setShow, show, handleShowBox, postTodoEntry, category, categories}) =>{
 
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
     const [formState, setFormState] = useState({
@@ -25,7 +25,8 @@ function AddItemBox({setShow, show, handleShowBox, postTodoEntry, category}) {
         }))
     }
 
-    if (show) {
+    if (categories[0] !== undefined && show) {
+        console.log(categories)
         return (
             <div style={{paddingTop: "1em"}}>
             <form id="usrform" onSubmit={handleSubmit}>
@@ -50,11 +51,17 @@ function AddItemBox({setShow, show, handleShowBox, postTodoEntry, category}) {
                 <select 
                     name="category" 
                     id="category" 
-                    defaultValue={formState.category}
+                    defaultValue={category}
                     onChange={handleInputChange}
                     >
-                    <option value="">Select Category</option>
-                    <option value="1">Option1</option>
+                        <option value="">Select Category</option>
+                        
+                        {categories.map(function(object, i) {
+                            return (
+                            <option key={i} value={object.category}>{object.category}</option>
+                            )
+                        })}
+                    
                 </select>
                 </div>
             </div>

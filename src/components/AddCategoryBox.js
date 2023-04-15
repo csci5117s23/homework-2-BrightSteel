@@ -1,9 +1,10 @@
 import 'bulma/css/bulma.min.css';
 import styles from '../styles/todos.module.css'
 import { useState } from 'react';
+import { create } from 'domain';
 
 
-function AddCategoryBox() {
+function AddCategoryBox({createCategory}) {
 
     const [show, setShow] = useState(false)
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
@@ -51,7 +52,7 @@ function AddCategoryBox() {
             </div>
             <div className="field is-grouped">
             <div className="control">
-                <button className="button is-info ">Add</button>
+                <button onClick={() => createCategory(formState.name)} className="button is-info ">Add</button>
             </div>
             <div className="control">
                 <button onClick={handleShowBox} className="button is-info is-light">Cancel</button>

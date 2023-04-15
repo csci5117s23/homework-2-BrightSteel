@@ -30,6 +30,75 @@ const userAuth = async (req, res, next) => {
 }
 app.use(userAuth)
 
+async function deleteCategory(req, res) {
+  if (req.user_token.sub !== undefined && req.user_token !== null) {
+    const conn = await Datastore.open()
+    const data = conn.removeOne('categories', req.body._id).json(res)
+    // res.json(data)
+  }
+  else {
+    res.status(400)
+  }
+}
+
+app.post('/deletecategory', deleteCategory)
+
+
+async function getCategories(req, res) {
+  if (req.user_token.sub !== undefined && req.user_token !== null) {
+    const conn = await Datastore.open()
+    const options = {
+        filter: {"user_id": req.user_token.sub}
+    }
+    const data = conn.getMany('categories').json(res);
+    // res.json(data)
+  }
+  else {
+    res.status(400)
+  }
+}
+
+async function getOneCategory(req, res) {
+    const conn = await Datastore.open()
+    const options = {
+        filter: {"user_id": "user_2OJ0cqWdowQZKxmsWVFTH7Em35Q"}
+    }
+    conn.getMany('categories', options).json(res)
+    // res.json(data)
+
+}
+
+async function getAllCats(req, res) {
+    const conn = await Datastore.open()
+    
+    conn.getMany('categories').json(res)
+    // res.json(data)
+
+}
+app.get('/categories-one', getOneCategory)
+
+app.get('/categories-all', getAllCats)
+// app.get('/categories', getAllCats)
+
+app.get('/categories', getCategories)
+
+
+async function createCategory(req, res) {
+  if (req.user_token.sub !== undefined && req.user_token !== null) {
+    const conn = await Datastore.open();
+    const data = await conn.insertOne('categories', {
+      "category": req.body.category,
+      "user_id": req.user_token.sub
+    });
+    res.status(201).json(data)
+  }
+  else {
+    res.status(400)
+  }
+}
+
+app.post('/category', createCategory)
+
 async function postTodo(req, res) {
   if (req.user_token.sub !== undefined && req.user_token !== null) {
   req.body.user_id = req.user_token.sub
@@ -82,6 +151,14 @@ async function clear(req, res) {
 }
 
 app.post('/clear', clear);
+
+async function clearCategories(req, res) {
+  const conn = await Datastore.open();
+  const data = await conn.removeMany('categories');
+  res.json(data);
+}
+
+app.post('/clearcategories', clearCategories);
 
 async function markDone(req, res) {
   const conn = await Datastore.open();
