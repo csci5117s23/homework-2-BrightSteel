@@ -7,14 +7,14 @@ Please fill out all of the following sections to help us grade your submission:
 
 ## Student (to be completed individually)
 
-* First Last, x500@umn.edu
+* Ryan Exner, exner014@umn.edu
 
 ## Link to Site
 
-<https://TODO.com/>
+<https://sage-haupia-8e2ac6.netlify.app/>
 
 ## Challenge Task
 
-* I started the challenge task: [yes/no]
-* I completed the challenge task: [yes/no]
+* I started the challenge task: [yes]
+* I completed the challenge task: [yes]
 
