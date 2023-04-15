@@ -3,14 +3,11 @@ import styles from '../styles/todos.module.css'
 import { useState } from 'react';
 
 
-const AddItemBox = ({setShow, show, handleShowBox, postTodoEntry, category, categories}) =>{
+const AddItemBox = ({setShow, show, handleShowBox, postTodoEntry, category, categories, setFormState, formState}) =>{
 
     // form state based off of https://www.freecodecamp.org/news/how-to-create-forms-in-react-using-react-hook-form/
-    const [formState, setFormState] = useState({
-        description: "",
-        category: category,
-        user_id: ""
-    })
+    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         postTodoEntry(formState)
@@ -26,7 +23,7 @@ const AddItemBox = ({setShow, show, handleShowBox, postTodoEntry, category, cate
     }
 
     if (categories[0] !== undefined && show) {
-        console.log(categories)
+        // console.log(categories)
         return (
             <div style={{paddingTop: "1em"}}>
             <form id="usrform" onSubmit={handleSubmit}>

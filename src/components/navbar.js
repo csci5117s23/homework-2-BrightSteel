@@ -17,11 +17,13 @@ function NavBar() {
                     <a onClick={() => router.push('/todos')} className={"navbar-item " + styles.navitem}>
                         Home
                     </a>
+                    
+                    <a onClick={() => router.push('/done')} className={"navbar-item " + styles.navitem}>                        
+                        Completed
+                    </a>
+
                     <a href='https://magical-molly-92.accounts.dev/sign-in' className={"navbar-item " + styles.navitem}>                       
                         Sign Out
-                    </a>
-                    <a onClick={() => router.push('/done')} className={"navbar-item " + styles.navitem}>                        
-                        Done
                     </a>
                 </div>
             </div>

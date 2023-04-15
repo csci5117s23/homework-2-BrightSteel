@@ -17,7 +17,7 @@ const Todo = () => {
     const {id} = router.query
 
     useEffect(() => {
-        console.log("test")
+        // console.log("test")
         getTodo()
 
     }, [userId])
@@ -41,7 +41,6 @@ const Todo = () => {
 
     async function editTodo() {
         todo.done = done;
-        todo.category = category
         if (userId) { // logged in user
             const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
             const token = await getToken({template: "codehooks"});
@@ -103,7 +102,7 @@ const Todo = () => {
                 }
             })
             const result = await promise.json()
-            console.log(result)
+            // console.log(result)
             setTodo(result)
             
             if (result.done === "true") {
@@ -129,6 +128,15 @@ const Todo = () => {
         }
     }
 
+    const handleInputChange = (event) => {
+
+        const {name, value} = event.target;
+        setTodo((prevProps) => ({
+            ...prevProps,
+            [name]: value
+        }))
+    }
+
     return (
         <>
         <NavBar></NavBar>
@@ -149,7 +157,7 @@ const Todo = () => {
                                 name="category" 
                                 id="category" 
                                 defaultValue={todo.category}
-                                onChange={setCategory}
+                                onChange={handleInputChange}
                                 >
                                     <option value="">None</option>
                                     

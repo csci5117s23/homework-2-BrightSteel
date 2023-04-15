@@ -7,6 +7,7 @@ import 'bulma/css/bulma.min.css';
 import { useAuth } from "@clerk/clerk-react"
 import AddCategoryBox from "./AddCategoryBox"
 import { useRouter } from "next/router"
+import SideBar from "./SideBar"
 
 const TodoPage = ({category}) => {
     const [todos, setTodos] = useState([])
@@ -15,15 +16,12 @@ const TodoPage = ({category}) => {
     const [reloadTodos, setReloadTodos] = useState(false)
 
     const [categories, setCategories] = useState([])
-    const [buttonStates, setButtonStates] = useState(
-        [false, false]
-    )
 
     const router = useRouter();
 
     async function postTodoEntry(data) {
         if (userId) { // logged in user
-            console.log(data)
+            // console.log(data)
             const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
             const token = await getToken({template: "codehooks"});
             const promise = await fetch(backend_base + "/todos",
@@ -37,15 +35,14 @@ const TodoPage = ({category}) => {
                 'body': JSON.stringify(data)
             })
             const results = await promise;
-            console.log(results)
+            // console.log(results)
 
             setReloadTodos(!reloadTodos)
+            formState.description = ""
         }
     }
 
-    function reload() {
-        setReloadTodos(!reloadTodos)
-    }
+    
 
     async function markDone(object) {
         object.done = "true"
@@ -67,57 +64,7 @@ const TodoPage = ({category}) => {
         }
     }
 
-    async function deleteCategory(id) {
-        if (userId) {
-            const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
-            const token = await getToken({template: "codehooks"});
-            const promise = await fetch(backend_base + "/deletecategory",
-            {
-                'method': 'POST',
-                'headers': {
-                    'x-api-key': 'a0ad972b-1710-4187-ac7f-bdd030d9d462',
-                    'Authorization': 'Bearer' + token,
-                    'Content-Type': 'application/json'
-                },
-                 'body': JSON.stringify({
-                     "_id": id
-                })
-            })
-            // console.log(id)
-            await promise
-            reload()
-            // console.log(results + "RESSS")
-        }
-    }
-
-    async function createCategory(name) {
-        if (userId && categories) {
-            if (categories[0] !== undefined && categories.some(i => i.category === name)) {
-                // category already exists
-            }
-            else {
-                const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
-                const token = await getToken({template: "codehooks"});
-                const promise = await fetch(backend_base + "/category",
-                {
-                    'method': 'POST',
-                    'headers': {
-                        'x-api-key': 'a0ad972b-1710-4187-ac7f-bdd030d9d462',
-                        'Authorization': 'Bearer' + token,
-                        'Content-Type': 'application/json'
-                    },
-                    'body': JSON.stringify({
-                        "category": name
-                    })
-                })
-                const results = await promise.json()
-                console.log("results")
-                console.log(results)
-                reload()
-            }
-        }
-    }
-
+    
     async function getCategories() {
         if (userId) {
             const backend_base = 'https://todolist-zsb7.api.codehooks.io/dev'
@@ -149,7 +96,7 @@ const TodoPage = ({category}) => {
             })
             const results = await promise.json()
             // use result
-            results.map(v => console.log(v))
+            // results.map(v => console.log(v))
             var notDone = results.filter(v => v.done !== "true")
             if (category !== "") {
                 notDone = notDone.filter(v => v.category === category)
@@ -162,7 +109,7 @@ const TodoPage = ({category}) => {
     useEffect(() => {
 
         getTodos()
-        console.log(todos)
+        // console.log(todos)
 
         
     }, [userId, reloadTodos])
@@ -184,31 +131,11 @@ const TodoPage = ({category}) => {
         }
     }
 
-    function editHover(i) {
-        setButtonStates((prevProps) => ({
-            ...prevProps,
-            [i]: true
-        }))
-
-
-    }
-
-    function editRemoveHover(i) {
-        setButtonStates((prevProps) => ({
-            ...prevProps,
-            [i]: false
-        }))
-
-    }
-
-    const EditButton = ({i}) => {
-        if (buttonStates[i] === true) {
-            return <button onClick={() => deleteCategory(categories[i]._id)} id="editbutton" className={styles.editbutton}><i className="fa-regular fa-trash"></i></button>
-        }
-        else {
-            return <div></div>;
-        }
-    }
+    const [formState, setFormState] = useState({
+        description: "",
+        category: category,
+        user_id: ""
+    })
 
     return (
         <>
@@ -216,31 +143,12 @@ const TodoPage = ({category}) => {
         <NavBar></NavBar>
         <div className={styles.body}>
             <div className="columns">
-                <div className="column is-one-quarter">
-                <aside className="menu" style={{paddingLeft: "0.4em"}}>
-                    <p className="menu-label">
-                        Categories
-                    </p>
-                    <ul className="menu-list">
-                    <li><a onClick={() => router.push('/todos')}>All To-Dos</a></li>
-
-                        {categories.map(function(object,i ){
-                            return (
-                                <li key={i} onMouseEnter={() => editHover(i)} onMouseLeave={() => editRemoveHover(i)} className="is-flex"><a onClick={() => router.push('/todos/' + object.category)}>{object.category}</a>
-                                <EditButton
-                                    
-                                    i={i}
-                                />
-                                </li>
-                            )
-                        })}
-                    </ul>
-                    <AddCategoryBox
-                    createCategory={createCategory} 
-                    />
-                </aside>
-                
-                </div>
+               <SideBar
+                    categories={categories}
+                    done={false}
+                    setReloadTodos={setReloadTodos}
+                    reloadTodos={reloadTodos}
+               />
                 <div className="column">
                     <div id="heading">
                         <h1 style={{fontWeight: "bold"}}>{getTodoTitle()}</h1>
@@ -263,6 +171,8 @@ const TodoPage = ({category}) => {
                         postTodoEntry={postTodoEntry}
                         category={category}
                         categories={categories}
+                        setFormState={setFormState}
+                        formState={formState}
                     />
 
                     {/* {categories.map(function (object) {
