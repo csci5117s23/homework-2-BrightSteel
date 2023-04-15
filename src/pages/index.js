@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut } from '@clerk/clerk-react'
+import { SignInButton, SignedIn, SignedOut } from '@clerk/clerk-react'
 import Head from 'next/head'
 import Redirect from './redirect'
 import NavBar from '../components/navbar'
@@ -18,6 +18,9 @@ export default function Home() {
       </Head>
       <NavBar></NavBar>
       <h1 className={styles.body + " columns is-centered"} style={{fontSize: "xx-large", fontWeight: "bold"}}>Ryan's Todo App</h1>
+      <div className="columns is-centered" style={{paddingTop: "1em"}}>
+        <SignInButton></SignInButton>
+      </div>
       <SignedIn>
       <Redirect
         url='/todos'
