@@ -4,8 +4,10 @@ import 'bulma/css/bulma.min.css'
 import styles from '../../styles/todos.module.css'
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
+import { RedirectNonLoggedIn, redirectNonLoggedIn } from "..";
 
 const Todo = () => {
+
     const {isLoaded, userId, sessionId, getToken} = useAuth();
     const [todo, setTodo] = useState({})
     const [done, setDone] = useState()
@@ -139,6 +141,7 @@ const Todo = () => {
 
     return (
         <>
+        <RedirectNonLoggedIn></RedirectNonLoggedIn>
         <NavBar></NavBar>
         <div className={styles.body}>
             <div className="columns is-centered">

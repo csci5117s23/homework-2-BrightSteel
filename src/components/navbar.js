@@ -2,13 +2,30 @@ import 'bulma/css/bulma.min.css';
 import styles from '../styles/navbar.module.css'
 import Redirect from '../pages/redirect';
 import { useRouter } from 'next/router';
-import { UserButton, useClerk } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, UserButton, useClerk, useSignIn } from '@clerk/clerk-react';
+import { useEffect, useState } from 'react';
 
 function NavBar() {
 
     const router = useRouter();
 
     const { signOut } = useClerk();
+
+    function handleClick() {
+        signOut()
+        setTrigger(true)
+        
+    }
+
+    const [trigger, setTrigger] = useState(false)
+
+    useEffect(() => {
+        let interval;
+        if (trigger) {
+          interval = setInterval(() => router.push("/"), 1000);
+        }
+        return () => clearInterval(interval);
+      }, [trigger])
 
     return (
         <>
@@ -24,10 +41,16 @@ function NavBar() {
                     <a onClick={() => router.push('/done')} className={"navbar-item " + styles.navitem}>                        
                         Completed
                     </a>
-
-                    <a onClick={() => signOut()} className={"navbar-item " + styles.navitem}>                       
+                    <SignedIn>
+                    <a onClick={handleClick} className={"navbar-item " + styles.navitem}>                       
                         Sign Out
                     </a>
+                    </SignedIn>
+                    <SignedOut>
+                    <a href="https://magical-molly-92.accounts.dev/sign-in" className={"navbar-item " + styles.navitem}>                       
+                        Sign In
+                    </a>
+                    </SignedOut>
                 </div>
             </div>
         </nav>

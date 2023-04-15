@@ -158,7 +158,7 @@ const TodoPage = ({category}) => {
                             return (
                             <div key={i} className={styles.todoitem}>
                                 <button onClick={(event) => handleMarkDone(event, object)} className={styles.simple}></button>
-                                <a onClick={() => router.push('todo/' + object._id)} >{object.description}</a>
+                                <a onClick={() => router.push('/todo/' + object._id)} >{object.description}</a>
                             </div>
                             )
                          
