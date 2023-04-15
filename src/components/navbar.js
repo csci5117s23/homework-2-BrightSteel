@@ -2,10 +2,13 @@ import 'bulma/css/bulma.min.css';
 import styles from '../styles/navbar.module.css'
 import Redirect from '../pages/redirect';
 import { useRouter } from 'next/router';
+import { UserButton, useClerk } from '@clerk/clerk-react';
 
 function NavBar() {
 
     const router = useRouter();
+
+    const { signOut } = useClerk();
 
     return (
         <>
@@ -22,7 +25,7 @@ function NavBar() {
                         Completed
                     </a>
 
-                    <a href='https://magical-molly-92.accounts.dev/sign-in' className={"navbar-item " + styles.navitem}>                       
+                    <a onClick={() => signOut()} className={"navbar-item " + styles.navitem}>                       
                         Sign Out
                     </a>
                 </div>
